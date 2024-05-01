@@ -36,7 +36,7 @@ create table PROFILE(
     device_type varchar(10),
     device_count smallint,
     profile_static boolean,
-    device_id smallint references DEVICE(device_id)
+    device_id smallint
 );
 
 create table PROGRAM_PROFILE(
