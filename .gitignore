@@ -1,0 +1,4 @@
+certs/
+cockroach-data/
+cockroach-db/
+keys/
