@@ -1,4 +1,5 @@
 drop table RESOURCE_MANAGER_DEVICE_PARAM;
+drop table DEVICE;
 drop table RESOURCE_MANAGER_PROGRAM_PARAM;
 drop table RESOURCE_MANAGER_PARAM;
 drop table RESOURCE_MANAGER;
@@ -6,7 +7,6 @@ drop table TASK_PROFILE;
 drop table TASK;
 drop table PROGRAM_PROFILE;
 drop table PROFILE;
-drop table DEVICE;
 drop table PROGRAM;
 
 create table PROGRAM(
@@ -15,17 +15,6 @@ create table PROGRAM(
     program_description varchar(100),
     program_active boolean,
     reg_date timestamp
-);
-
-create table DEVICE(
-    device_id smallint unique primary key,
-    device_name varchar(30),
-    device_description varchar(50),
-    device_type varchar(10),
-    device_online boolean,
-    device_status smallint,
-    task_id bigint,
-    task_priority int
 );
 
 create table PROFILE(
@@ -79,6 +68,18 @@ create table RESOURCE_MANAGER_PROGRAM_PARAM(
     program_id int references PROGRAM(program_id),
     param_name varchar(30), --INIT_TIME, CHECK_TIME, MIN_WORK_TIME, MAX_WORK_TIME, SAVE_TIME, PROGRESS_INFO_TIME
     param_value varchar(150)
+);
+
+create table DEVICE(
+    device_id smallint unique primary key,
+    device_name varchar(30),
+    device_description varchar(50),
+    device_type varchar(10),
+    device_online boolean,
+    device_status smallint,
+    manager_id smallint references RESOURCE_MANAGER(manager_id),
+    task_id bigint,
+    task_priority int
 );
 
 create table RESOURCE_MANAGER_DEVICE_PARAM(

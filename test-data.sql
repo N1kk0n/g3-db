@@ -4,32 +4,41 @@ delete from program_profile;
 delete from program;
 delete from profile;
 delete from device;
+delete from resource_manager;
+
+-- resource_managers
+insert into resource_manager(manager_id, manager_name, manager_online, manager_status, manager_address)
+values (1, 'dev-manager', false, 0, '127.0.0.1:8080');
 
 -- devices
 insert into device(device_id,
                    device_name, device_description,
                    device_type,
                    device_online, device_status,
+                   manager_id,
                    task_id, task_priority)
-values (1, 'dev-1-4cpu', '4 CPU (1/4)', 'c', false, 0, -1, -1);
+values (1, 'dev-1-4cpu', '4 CPU (1/4)', 'c', false, 0, 1, -1, -1);
 insert into device(device_id,
                    device_name, device_description,
                    device_type,
                    device_online, device_status,
+                   manager_id,
                    task_id, task_priority)
-values (2, 'dev-2-4cpu', '4 CPU (1/4)', 'c', false, 0, -1, -1);
+values (2, 'dev-2-4cpu', '4 CPU (1/4)', 'c', false, 0, 1, -1, -1);
 insert into device(device_id,
                    device_name, device_description,
                    device_type,
                    device_online, device_status,
+                   manager_id,
                    task_id, task_priority)
-values (3, 'dev-3-4cpu', '4 CPU (1/4)', 'c', false, 0, -1, -1);
+values (3, 'dev-3-4cpu', '4 CPU (1/4)', 'c', false, 0, 1, -1, -1);
 insert into device(device_id,
                    device_name, device_description,
                    device_type,
                    device_online, device_status,
+                   manager_id,
                    task_id, task_priority)
-values (4, 'dev-4-4cpu', '4 CPU (1/4)', 'c', false, 0, -1, -1);
+values (4, 'dev-4-4cpu', '4 CPU (1/4)', 'c', false, 0, 1, -1, -1);
 
 --profiles
 insert into profile(profile_id,
