@@ -1,13 +1,76 @@
-drop table RESOURCE_MANAGER_DEVICE_PARAM;
-drop table DEVICE;
-drop table RESOURCE_MANAGER_PROGRAM_PARAM;
-drop table RESOURCE_MANAGER_PARAM;
-drop table RESOURCE_MANAGER;
-drop table TASK_PROFILE;
-drop table TASK;
-drop table PROGRAM_PROFILE;
-drop table PROFILE;
-drop table PROGRAM;
+drop table if exists TASK_SESSION_STAGE;
+drop table if exists TASK_SESSION;
+drop table if exists RESOURCE_MANAGER_DEVICE_PARAM;
+drop table if exists DEVICE;
+drop table if exists RESOURCE_MANAGER_PROGRAM_PARAM;
+drop table if exists RESOURCE_MANAGER_PARAM;
+drop table if exists RESOURCE_MANAGER;
+drop table if exists TASK_PROFILE;
+drop table if exists TASK;
+drop table if exists PROGRAM_PROFILE;
+drop table if exists PROFILE;
+drop table if exists PROGRAM;
+drop table if exists DICT_TASK_SESSION_STATUS;
+drop table if exists DICT_DEVICE_STATUS;
+drop table if exists DICT_TASK_PROFILE_STATUS;
+
+create table DICT_TASK_PROFILE_STATUS(
+    constant_status smallint unique,
+    constant_value varchar(30)
+);
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (1, 'ADD_TASK_IN_PROGRESS');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-1, 'ADD_TASK_FAILED');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (2, 'IN_QUEUE');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-2, 'DELETED');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (3, 'UPLOAD_DATA_IN_PROGRESS');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-3, 'UPLOAD_DATA_FAILED');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (4, 'DEPLOY_IN_PROGRESS');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-4, 'DEPLOY_FAILED');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (5, 'IN_WORK');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-5, 'IS_STUCK');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (6, 'STOP_IN_PROGRESS');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-6, 'STOP_FAILED');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (7, 'COLLECT_IN_PROGRESS');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-7, 'COLLECT_FAILED');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (8, 'UPLOAD_IN_PROGRESS');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-8, 'UPLOAD_FAILED');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (9, 'ENDED');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-9, 'END_ERROR');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-91, 'END_MIN_TIME_ERROR');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-92, 'END_MAX_TIME_ERROR');
+
+create table DICT_DEVICE_STATUS(
+    constant_status smallint unique,
+    constant_value varchar(30)
+);
+insert into DICT_DEVICE_STATUS(constant_status, constant_value) values (-1, 'BROKEN');
+insert into DICT_DEVICE_STATUS(constant_status, constant_value) values (0, 'READY');
+insert into DICT_DEVICE_STATUS(constant_status, constant_value) values (1, 'IN_WORK');
+
+create table DICT_TASK_SESSION_STATUS(
+    constant_status smallint unique,
+    constant_value varchar(30)
+);
+insert into DICT_TASK_SESSION_STATUS(constant_status, constant_value) values (1, 'INITIALIZATION');
+insert into DICT_TASK_SESSION_STATUS(constant_status, constant_value) values (2, 'CHECK_DEVICE_IN_PROGRESS');
+insert into DICT_TASK_SESSION_STATUS(constant_status, constant_value) values (-2, 'CHECK_DEVICE_FAILED');
+insert into DICT_TASK_SESSION_STATUS(constant_status, constant_value) values (3, 'UPLOAD_DATA_IN_PROGRESS');
+insert into DICT_TASK_SESSION_STATUS(constant_status, constant_value) values (-3, 'UPLOAD_DATA_FAILED');
+insert into DICT_TASK_SESSION_STATUS(constant_status, constant_value) values (4, 'DEPLOY_IN_PROGRESS');
+insert into DICT_TASK_SESSION_STATUS(constant_status, constant_value) values (-4, 'DEPLOY_FAILED');
+insert into DICT_TASK_SESSION_STATUS(constant_status, constant_value) values (5, 'IN_WORK');
+insert into DICT_TASK_SESSION_STATUS(constant_status, constant_value) values (-5, 'IS_STUCK');
+insert into DICT_TASK_SESSION_STATUS(constant_status, constant_value) values (6, 'STOP_IN_PROGRESS');
+insert into DICT_TASK_SESSION_STATUS(constant_status, constant_value) values (-6, 'STOP_FAILED');
+insert into DICT_TASK_SESSION_STATUS(constant_status, constant_value) values (7, 'COLLECT_IN_PROGRESS');
+insert into DICT_TASK_SESSION_STATUS(constant_status, constant_value) values (-7, 'COLLECT_FAILED');
+insert into DICT_TASK_SESSION_STATUS(constant_status, constant_value) values (8, 'UPLOAD_IN_PROGRESS');
+insert into DICT_TASK_SESSION_STATUS(constant_status, constant_value) values (-8, 'UPLOAD_FAILED');
+insert into DICT_TASK_SESSION_STATUS(constant_status, constant_value) values (9, 'ENDED');
+insert into DICT_TASK_SESSION_STATUS(constant_status, constant_value) values (91, 'ENDED_SAVE_DATA');
+insert into DICT_TASK_SESSION_STATUS(constant_status, constant_value) values (-9, 'END_ERROR');
+insert into DICT_TASK_SESSION_STATUS(constant_status, constant_value) values (-91, 'END_MIN_TIME_ERROR');
+insert into DICT_TASK_SESSION_STATUS(constant_status, constant_value) values (-92, 'END_MAX_TIME_ERROR');
 
 create table PROGRAM(
     program_id int unique primary key,
@@ -38,7 +101,7 @@ create table PROGRAM_PROFILE(
 create table TASK(
     task_id bigint unique primary key,
     program_id int references PROGRAM(program_id),
-    task_status smallint,
+    task_status smallint references DICT_TASK_PROFILE_STATUS(constant_status),
     req_time timestamp
 );
 
@@ -46,7 +109,7 @@ create table TASK_PROFILE(
     task_id bigint references TASK(task_id),
     profile_id smallint references PROFILE(profile_id),
     profile_priority int,
-    profile_status smallint
+    profile_status smallint references DICT_TASK_PROFILE_STATUS(constant_status)
 );
 
 create table RESOURCE_MANAGER(
@@ -76,7 +139,7 @@ create table DEVICE(
     device_description varchar(50),
     device_type varchar(10),
     device_online boolean,
-    device_status smallint,
+    device_status smallint references DICT_DEVICE_STATUS(constant_status),
     manager_id smallint references RESOURCE_MANAGER(manager_id),
     task_id bigint,
     task_priority int
@@ -85,7 +148,20 @@ create table DEVICE(
 create table RESOURCE_MANAGER_DEVICE_PARAM(
     manager_id smallint references RESOURCE_MANAGER(manager_id),
     device_id smallint references DEVICE(device_id),
-    device_name varchar(30),
     param_name varchar(30),
     param_value varchar(150)
-)
+);
+
+create table TASK_SESSION(
+    session_id bigint unique not null primary key,
+    task_id bigint references TASK(task_id),
+    manager_id smallint references RESOURCE_MANAGER(manager_id),
+    session_status smallint
+);
+
+create table TASK_SESSION_STAGE(
+    session_id bigint references TASK_SESSION(session_id),
+    stage_name varchar(30),
+    start_time timestamp,
+    finish_time timestamp
+);
