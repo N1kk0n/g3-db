@@ -81,25 +81,25 @@ values (2, 2, true, current_timestamp);
 
 --tasks
 insert into task(task_id, program_id, task_status, req_time)
-values(1, 1, 0, current_timestamp);
+values(1, 1, 2, current_timestamp);
 insert into task(task_id, program_id, task_status, req_time)
-values(2, 2, 0, current_timestamp);
+values(2, 2, 2, current_timestamp);
 insert into task(task_id, program_id, task_status, req_time)
-values(3, 2, 0, current_timestamp);
+values(3, 2, 2, current_timestamp);
 
 --task_profiles
 insert into task_profile(task_id, profile_id, profile_priority, profile_status)
-values (1, 1, 10, 0);
+values (1, 1, 10, 2);
 insert into task_profile(task_id, profile_id, profile_priority, profile_status)
-values (1, 2, 15, 0);
+values (1, 2, 15, 2);
 insert into task_profile(task_id, profile_id, profile_priority, profile_status)
-values (1, 3, 20, 0);
+values (1, 3, 20, 2);
 
 insert into task_profile(task_id, profile_id, profile_priority, profile_status)
-values (2, 1, 10, 0);
+values (2, 1, 10, 2);
 insert into task_profile(task_id, profile_id, profile_priority, profile_status)
-values (2, 2, 15, 0);
+values (2, 2, 15, 2);
 
 insert into task_profile(task_id, profile_id, profile_priority, profile_status)
-values (3, 1, 10, 0);
+values (3, 1, 10, 2);
 
