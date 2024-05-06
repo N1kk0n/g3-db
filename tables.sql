@@ -1,3 +1,4 @@
+drop table if exists DECISION;
 drop table if exists TASK_SESSION_STAGE;
 drop table if exists TASK_SESSION;
 drop table if exists RESOURCE_MANAGER_DEVICE_PARAM;
@@ -164,4 +165,10 @@ create table TASK_SESSION_STAGE(
     stage_name varchar(30),
     start_time timestamp,
     finish_time timestamp
+);
+
+create table DECISION(
+    task_id bigint,
+    device_name varchar(30),
+    manager_name varchar(30)
 );
