@@ -8,7 +8,7 @@ delete from resource_manager;
 
 -- resource_managers
 insert into resource_manager(manager_id, manager_name, manager_online, manager_status, manager_address)
-values (1, 'dev-manager', false, 0, '127.0.0.1:8080');
+values (1, 'dev-manager', true, 0, '127.0.0.1:8080');
 
 -- devices
 insert into device(device_id,
@@ -17,28 +17,28 @@ insert into device(device_id,
                    device_online, device_status,
                    manager_id,
                    task_id, task_priority)
-values (1, 'dev-1-4cpu', '4 CPU (1/4)', 'c', false, 0, 1, -1, -1);
+values (1, 'dev-1-4cpu', '4 CPU (1/4)', 'c', true, 0, 1, -1, -1);
 insert into device(device_id,
                    device_name, device_description,
                    device_type,
                    device_online, device_status,
                    manager_id,
                    task_id, task_priority)
-values (2, 'dev-2-4cpu', '4 CPU (1/4)', 'c', false, 0, 1, -1, -1);
+values (2, 'dev-2-4cpu', '4 CPU (1/4)', 'c', true, 0, 1, -1, -1);
 insert into device(device_id,
                    device_name, device_description,
                    device_type,
                    device_online, device_status,
                    manager_id,
                    task_id, task_priority)
-values (3, 'dev-3-4cpu', '4 CPU (1/4)', 'c', false, 0, 1, -1, -1);
+values (3, 'dev-3-4cpu', '4 CPU (1/4)', 'c', true, 0, 1, -1, -1);
 insert into device(device_id,
                    device_name, device_description,
                    device_type,
                    device_online, device_status,
                    manager_id,
                    task_id, task_priority)
-values (4, 'dev-4-4cpu', '4 CPU (1/4)', 'c', false, 0, 1, -1, -1);
+values (4, 'dev-4-4cpu', '4 CPU (1/4)', 'c', true, 0, 1, -1, -1);
 
 --profiles
 insert into profile(profile_id,
@@ -59,6 +59,12 @@ insert into profile(profile_id,
                     device_type, device_count,
                     profile_static, device_id)
 values (3, '4cpu-full', '1/4 half of <dev-*-4cpu>', true, 'c', 4, false, -1);
+insert into profile(profile_id,
+                    profile_name, profile_description,
+                    profile_active,
+                    device_type, device_count,
+                    profile_static, device_id)
+values (4, '4cpu-1/4 (static)', '1/4 half of <dev-*-4cpu> (static)', true, 'c', 1, true, 1);
 
 --programs
 insert into program(program_id, program_name, program_description, program_active, reg_date)
@@ -73,6 +79,8 @@ insert into program_profile(program_id, profile_id, profile_active, reg_date)
 values (1, 2, true, current_timestamp);
 insert into program_profile(program_id, profile_id, profile_active, reg_date)
 values (1, 3, true, current_timestamp);
+insert into program_profile(program_id, profile_id, profile_active, reg_date)
+values (1, 4, true, current_timestamp);
 
 insert into program_profile(program_id, profile_id, profile_active, reg_date)
 values (2, 1, true, current_timestamp);
@@ -94,6 +102,8 @@ insert into task_profile(task_id, profile_id, profile_priority, profile_status)
 values (1, 2, 15, 2);
 insert into task_profile(task_id, profile_id, profile_priority, profile_status)
 values (1, 3, 20, 2);
+insert into task_profile(task_id, profile_id, profile_priority, profile_status)
+values (1, 4, 30, 2);
 
 insert into task_profile(task_id, profile_id, profile_priority, profile_status)
 values (2, 1, 10, 2);
