@@ -1,3 +1,4 @@
+drop table if exists QUEUE_MANAGER_PARAM;
 drop table if exists DECISION;
 drop table if exists TASK_SESSION_STAGE;
 drop table if exists TASK_SESSION;
@@ -175,3 +176,11 @@ create table DECISION(
     device_name varchar(30),
     manager_name varchar(30)
 );
+
+create table QUEUE_MANAGER_PARAM(
+    id smallint primary key,
+    param_name varchar(30),
+    param_value varchar(150)
+);
+
+insert into QUEUE_MANAGER_PARAM(id, param_name, param_value) values (1, 'DECISION_TIMEOUT_SEC', '30');
