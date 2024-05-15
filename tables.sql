@@ -127,11 +127,34 @@ create table RESOURCE_MANAGER(
     manager_address varchar(50)
 );
 
+insert into RESOURCE_MANAGER(manager_id, manager_name, manager_online, manager_status, manager_address)
+values (1, 'dev-manager', true, 0, '127.0.0.1:8080');
+
 create table RESOURCE_MANAGER_PARAM(
     manager_id smallint references RESOURCE_MANAGER(manager_id),
     param_name varchar(30),
     param_value varchar(150)
 );
+
+insert into RESOURCE_MANAGER_PARAM (manager_id, param_name, param_value) values (1, 'HOME_DIR', '/opt/programs_home');
+insert into RESOURCE_MANAGER_PARAM (manager_id, param_name, param_value) values (1, 'TASK_LOG_DIR', '/opt/programs_home/logs');
+insert into RESOURCE_MANAGER_PARAM (manager_id, param_name, param_value) values (1, 'CHECK_NAME', 'check.sh');
+insert into RESOURCE_MANAGER_PARAM (manager_id, param_name, param_value) values (1, 'DEPLOY_NAME', 'deploy.sh');
+insert into RESOURCE_MANAGER_PARAM (manager_id, param_name, param_value) values (1, 'RUN_NAME', 'run.sh');
+insert into RESOURCE_MANAGER_PARAM (manager_id, param_name, param_value) values (1, 'STOP_NAME', 'stop.sh');
+insert into RESOURCE_MANAGER_PARAM (manager_id, param_name, param_value) values (1, 'COLLECT_NAME', 'collect.sh');
+insert into RESOURCE_MANAGER_PARAM (manager_id, param_name, param_value) values (1, 'PROGRESS_INFO_NAME', 'progress_info.sh');
+insert into RESOURCE_MANAGER_PARAM (manager_id, param_name, param_value) values (1, 'DOWNLOAD_COUNTDOWN', '60');
+insert into RESOURCE_MANAGER_PARAM (manager_id, param_name, param_value) values (1, 'CHECKDEVICE_COUNTDOWN', '30');
+insert into RESOURCE_MANAGER_PARAM (manager_id, param_name, param_value) values (1, 'CHECK_COUNTDOWN', '30');
+insert into RESOURCE_MANAGER_PARAM (manager_id, param_name, param_value) values (1, 'DEPLOY_COUNTDOWN', '30');
+insert into RESOURCE_MANAGER_PARAM (manager_id, param_name, param_value) values (1, 'STOP_COUNTDOWN', '120');
+insert into RESOURCE_MANAGER_PARAM (manager_id, param_name, param_value) values (1, 'COLLECT_COUNTDOWN', '30');
+insert into RESOURCE_MANAGER_PARAM (manager_id, param_name, param_value) values (1, 'UPLOAD_COUNTDOWN', '120');
+insert into RESOURCE_MANAGER_PARAM (manager_id, param_name, param_value) values (1, 'PROGRESSINFO_COUNTDOWN', '10');
+insert into RESOURCE_MANAGER_PARAM (manager_id, param_name, param_value) values (1, 'RESTORE_TIMEOUT', '60');
+insert into RESOURCE_MANAGER_PARAM (manager_id, param_name, param_value) values (1, 'LOG_MAX_AGE', '14');
+insert into RESOURCE_MANAGER_PARAM (manager_id, param_name, param_value) values (1, 'DEBUG_MODE', 'false');
 
 create table RESOURCE_MANAGER_PROGRAM_PARAM(
     manager_id smallint references RESOURCE_MANAGER(manager_id),
