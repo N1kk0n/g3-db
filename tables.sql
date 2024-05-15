@@ -26,22 +26,24 @@ insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (2,
 insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-2, 'DELETED');
 insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (3, 'UPLOAD_DATA_IN_PROGRESS');
 insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-3, 'UPLOAD_DATA_FAILED');
-insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (4, 'DEPLOY_IN_PROGRESS');
-insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-4, 'DEPLOY_FAILED');
-insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (5, 'IN_WORK_PROTECTED');
-insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (6, 'IN_WORK');
-insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-6, 'IS_STUCK');
-insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (7, 'STOP_IN_PROGRESS');
-insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-7, 'STOP_FAILED');
-insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (8, 'COLLECT_IN_PROGRESS');
-insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-8, 'COLLECT_FAILED');
-insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (9, 'UPLOAD_IN_PROGRESS');
-insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-9, 'UPLOAD_FAILED');
-insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (10, 'ENDED');
-insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (101, 'ENDED_SAVE_DATA');
-insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-10, 'END_ERROR');
-insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-101, 'END_MIN_TIME_ERROR');
-insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-102, 'END_MAX_TIME_ERROR');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (4, 'DOWNLOAD_IN_PROGRESS');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-4, 'DOWNLOAD_FAILED');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (5, 'DEPLOY_IN_PROGRESS');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-5, 'DEPLOY_FAILED');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (6, 'IN_WORK_PROTECTED');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (7, 'IN_WORK');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-7, 'IS_STUCK');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (8, 'STOP_IN_PROGRESS');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-8, 'STOP_FAILED');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (9, 'COLLECT_IN_PROGRESS');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-9, 'COLLECT_FAILED');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (10, 'UPLOAD_IN_PROGRESS');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-10, 'UPLOAD_FAILED');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (11, 'ENDED');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (111, 'ENDED_SAVE_DATA');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-11, 'END_ERROR');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-111, 'END_MIN_TIME_ERROR');
+insert into DICT_TASK_PROFILE_STATUS(constant_status, constant_value) values (-112, 'END_MAX_TIME_ERROR');
 
 create table DICT_DEVICE_STATUS(
     constant_status smallint unique,
