@@ -1,13 +1,16 @@
 drop table if exists QUEUE_MANAGER_PARAM;
 drop table if exists DECISION;
 drop table if exists TASK_SESSION_STAGE;
+drop sequence if exists SESSION_ID_SEQ;
 drop table if exists TASK_SESSION;
 drop table if exists RESOURCE_MANAGER_DEVICE_PARAM;
 drop table if exists DEVICE;
 drop table if exists RESOURCE_MANAGER_PROGRAM_PARAM;
 drop table if exists RESOURCE_MANAGER_PARAM;
 drop table if exists RESOURCE_MANAGER;
+drop view if exists QUEUE;
 drop table if exists TASK_PROFILE;
+drop sequence if exists TASK_ID_SEQ;
 drop table if exists TASK;
 drop table if exists PROGRAM_PROFILE;
 drop table if exists PROFILE;
@@ -15,6 +18,23 @@ drop table if exists PROGRAM;
 drop table if exists DICT_TASK_SESSION_STATUS;
 drop table if exists DICT_DEVICE_STATUS;
 drop table if exists DICT_TASK_PROFILE_STATUS;
+drop table if exists USER_ACCOUNT;
+drop table if exists USER_ROLE;
+
+create table USER_ROLE(
+    user_role varchar(30) unique not null
+);
+
+insert into USER_ROLE(user_role)values ('admin');
+insert into USER_ROLE(user_role)values ('user');
+insert into USER_ROLE(user_role)values ('guest');
+
+create table USER_ACCOUNT(
+    user_id smallint unique primary key,
+    user_name varchar(30),
+    user_role varchar(30) references USER_ROLE(user_role),
+    user_hash varchar(255)
+);
 
 create table DICT_TASK_PROFILE_STATUS(
     constant_status smallint unique,
@@ -108,9 +128,11 @@ create table PROGRAM_PROFILE(
 create table TASK(
     task_id bigint unique primary key,
     program_id int references PROGRAM(program_id),
-    task_status smallint references DICT_TASK_PROFILE_STATUS(constant_status),
+    user_id smallint references USER_ACCOUNT(user_id),
     req_time timestamp
 );
+
+create sequence TASK_ID_SEQ start with 1 increment by 1;
 
 create table TASK_PROFILE(
     task_id bigint references TASK(task_id),
@@ -189,6 +211,8 @@ create table TASK_SESSION(
     session_status smallint
 );
 
+create sequence SESSION_ID_SEQ start with 1 increment by 1;
+
 create table TASK_SESSION_STAGE(
     session_id bigint references TASK_SESSION(session_id),
     stage_name varchar(30),
@@ -198,6 +222,7 @@ create table TASK_SESSION_STAGE(
 
 create table DECISION(
     task_id bigint,
+    program_id int,
     device_name varchar(30),
     manager_name varchar(30)
 );
