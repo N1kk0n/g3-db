@@ -230,7 +230,7 @@ create table state_schema.GRAPH(
 );
 
 
-create table state_schema.ACTIVE_GRAPH(
+create table state_schema.ROUTE(
     id serial primary key,
     graph_id int not null references state_schema.GRAPH(id),
     status int not null
@@ -240,6 +240,7 @@ create table state_schema.ACTIVE_GRAPH(
 create table state_schema.VERTEX(
     id int primary key,
     graph_id int not null references state_schema.GRAPH(id),
+    vertex_num int not null,
     operation_id int not null
 );
 
@@ -255,7 +256,7 @@ create table state_schema.EDGE(
 create table state_schema.TOPIC_MESSAGE(
     id bigserial primary key,
     unique_id uuid unique not null,
-    active_graph_id int not null,
+    route_id int not null,
     producer_component varchar(64) not null,
     consumer_component varchar(64) not null,
     is_received boolean not null,
@@ -478,17 +479,18 @@ insert into state_schema.component(id, component_name, topic_name) values(1, 'qm
 insert into state_schema.component(id, component_name, topic_name) values(2, 'rm', 'rm-topic');
 
 --operations
-insert into state_schema.operation(id, operation_name, component_id) values(1, 'op1', 1);
-insert into state_schema.operation(id, operation_name, component_id) values(2, 'op2', 2);
+insert into state_schema.operation(id, operation_name, component_id) values(1, 'TEST', 1);
+insert into state_schema.operation(id, operation_name, component_id) values(2, 'TEST', 2);
 insert into state_schema.operation(id, operation_name, component_id) values(3, 'END', 1);
+insert into state_schema.operation(id, operation_name, component_id) values(4, 'END', 2);
 
 --graphs
-insert into state_schema.graph(id, graph_name) values(1, 'test-graph');
+insert into state_schema.graph(id, graph_name) values(1, 'G3-TEST');
 
 --vertexes
-insert into state_schema.vertex(id, graph_id, operation_id) values(1, 1, 1);
-insert into state_schema.vertex(id, graph_id, operation_id) values(2, 1, 2);
-insert into state_schema.vertex(id, graph_id, operation_id) values(3, 1, 3);
+insert into state_schema.vertex(id, graph_id, vertex_num, operation_id) values(1, 1, 1, 1);
+insert into state_schema.vertex(id, graph_id, vertex_num, operation_id) values(2, 1, 2, 2);
+insert into state_schema.vertex(id, graph_id, vertex_num, operation_id) values(3, 1, 3, 3);
 
 --edges
 insert into state_schema.edge(graph_id, curr_vertex_id, result, next_graph_id, next_vertex_id) values(1, 1, 2, 1, 2);
