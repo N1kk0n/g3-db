@@ -250,7 +250,8 @@ create table state_schema.EDGE(
     curr_vertex_id int not null,
     result int not null,
     next_graph_id int not null,
-    next_vertex_id int not null
+    next_vertex_id int not null,
+    child_route boolean not null
 );
 
 create table state_schema.TOPIC_MESSAGE(
@@ -493,5 +494,5 @@ insert into state_schema.vertex(id, graph_id, vertex_num, operation_id) values(2
 insert into state_schema.vertex(id, graph_id, vertex_num, operation_id) values(3, 1, 3, 3);
 
 --edges
-insert into state_schema.edge(graph_id, curr_vertex_id, result, next_graph_id, next_vertex_id) values(1, 1, 2, 1, 2);
-insert into state_schema.edge(graph_id, curr_vertex_id, result, next_graph_id, next_vertex_id) values(1, 2, 2, 1, 3);
+insert into state_schema.edge(graph_id, curr_vertex_id, result, next_graph_id, next_vertex_id, child_route) values(1, 1, 2, 1, 2, false);
+insert into state_schema.edge(graph_id, curr_vertex_id, result, next_graph_id, next_vertex_id, child_route) values(1, 2, 2, 1, 3, false);
